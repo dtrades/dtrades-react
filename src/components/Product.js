@@ -58,7 +58,7 @@ const shipping = {
 };
 
 function MediaControlCard(props) {
-  const { classes, theme, id, seller, escrow, metadata, price, total_price } = props;
+  const { classes, theme, id, seller, escrow, metadata, price, total_price, shipping, tracking } = props;
   console.log(props);
   return (
     <Card className={classes.card}>
