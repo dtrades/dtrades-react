@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { eos, buyer, seller } from "../eosjs";
+import { eos, buyer, seller, contractName } from "../eosjs";
 import Form from "../pagedraw/component_1";
 
 import { encrypt } from "eos-communication-lib";
@@ -20,8 +20,25 @@ class ProductDetail extends Component {
     this.setState({ [name]: value });
   }
 
-  async onBuy() {
+  async fetchTable(tableName) {
+    console.log("fetching table");
+    const { rows } = await eos.getTableRows(
+      true,
+      contractName,
+      contractName,
+      this.props.table
+    );
+    this.setState({ rows });
+  }
+
+  async componentDidMount() {
+    this.fetchTable();
+  }
+
+  async onBuy(id) {
+    console.log("received", id);
     const { productid } = this.props.match.params;
+    console.log(productid, "you have");
     const message = JSON.stringify({ ...this.state });
     const cipherText = encrypt(buyer.priv, seller.pub, message);
     console.log(JSON.stringify(cipherText));
@@ -30,9 +47,36 @@ class ProductDetail extends Component {
       broadcast: true,
       sign: true
     };
-    const data = await eos.getTableRows(true, 'dtradesdapp1', 'dtradesdapp1', 'products')
-    console.log(data)
-
+    const x = await eos.transfer(
+      buyer.accountName,
+      seller.accountName,
+      "1.0000 EOS",
+      "working",
+      options
+    );
+    console.log(x);
+    // To push transaction
+    const result = await eos.transaction({
+      actions: [
+        {
+          account: contractName,
+          name: "purchase",
+          authorization: [
+            {
+              actor: buyer.accountName,
+              permission: "active"
+            }
+          ],
+          data: {
+            buyer: buyer.accountName,
+            product_id: 0,
+            quantity: 1,
+            shipping: cipherText
+          }
+        }
+      ]
+    });
+    console.log(result);
   }
 
   componentDidMount() {
@@ -42,7 +86,7 @@ class ProductDetail extends Component {
   render() {
     return (
       <div>
-        <Form onChange={this.onChange} {...this.state} />
+        <Form onChange={this.onChange} buy={this.onBuy} {...this.state} />
       </div>
     );
   }
