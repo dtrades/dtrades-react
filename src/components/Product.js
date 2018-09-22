@@ -12,6 +12,7 @@ import SubmitTracking from '../components/SubmitTracking';
 import ViewTracking from '../components/ViewTracking';
 import ViewShipping from '../components/ViewShipping';
 import * as accounts from "../accounts";
+import "./Product.css";
 
 import { Link } from 'react-router-dom'
 
