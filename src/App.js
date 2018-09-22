@@ -31,6 +31,9 @@ const styles = theme => ({
   appBar: {
     position: 'relative',
   },
+  toolbarTitle: {
+    flex: 1,
+  },
   icon: {
     marginRight: theme.spacing.unit * 2,
   },
@@ -81,24 +84,19 @@ const App = props => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position="static" color="default" className={classes.appBar}>
         <Toolbar>
-          <CameraIcon className={classes.icon} />
-          <Typography variant="title" color="inherit" noWrap>
-            Album layout
-          </Typography>
+          <img src={logo}/>
         </Toolbar>
       </AppBar>
       <main>
-      {/**
-      <nav>
-        <Link to="/">Dashboard</Link>
-        <Link to={`/products`}>Products</Link>
-        <Link to={`/orders`}>Orders</Link>
-        <Link to={`/history/dtradebuyer1`}>History</Link>
-        <Link to={`/product/hello`}>Product</Link>
-      </nav>
-      **/}
+        <nav>
+          <Link to="/">Dashboard</Link>
+          <Link to={`/products`}>Products</Link>
+          <Link to={`/orders`}>Orders</Link>
+          <Link to={`/history/dtradebuyer1`}>History</Link>
+          <Link to={`/product/hello`}>Product</Link>
+        </nav>
         <div>
           {/*<Route path="/" component={Dashboard}/>*/}
           <Switch>
@@ -113,10 +111,10 @@ const App = props => {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="title" align="center" gutterBottom>
-          Footer
+          Thanks for using DTrades
         </Typography>
         <Typography variant="subheading" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Made in a hurry by Team Computer Magic
         </Typography>
       </footer>
       {/* End footer */}
