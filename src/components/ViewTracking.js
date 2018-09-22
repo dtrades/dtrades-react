@@ -6,7 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import LockOpenOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import DoneIcon from '@material-ui/icons/Done';
 
 export default class FormDialog extends React.Component {
 
@@ -40,6 +42,7 @@ export default class FormDialog extends React.Component {
           <DialogTitle id="form-dialog-title">Tracking Information</DialogTitle>
           <DialogContent>
             <DialogContentText>
+              {this.state.show ? (<LockOpenOutlinedIcon/>) : (<LockOutlinedIcon/>)}
               {this.state.show ? this.props.decrypt : this.props.encrypt }
             </DialogContentText>
           </DialogContent>
@@ -48,7 +51,8 @@ export default class FormDialog extends React.Component {
               Close
             </Button>
             <Button onClick={this.handleDecrypt} color="primary">
-              <LockOpenOutlinedIcon/>Decrypt
+              {this.state.show ? (<DoneIcon/>) : (<LockOpenOutlinedIcon/>)}
+              {this.state.show ? 'Decrypted' : 'Decrypt' }
             </Button>
           </DialogActions>
         </Dialog>
