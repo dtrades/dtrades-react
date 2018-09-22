@@ -31,8 +31,7 @@ class ProductDetail extends Component {
       console.log(this.props.table, 'ggg')
     return (
       <div>
-        <h1>hi</h1>
-        {this.state.rows.map(product => <AnItem {...product}/>)}
+        {this.state.rows.map(product => <AnItem key={product.id} {...product}/>)}
       </div>
     );
   }
