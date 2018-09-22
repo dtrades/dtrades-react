@@ -4,35 +4,44 @@ import Form from "../pagedraw/component_1";
 
 import { encrypt } from "eos-communication-lib";
 
+import AddressForm from '../components/AddressForm'
+
+
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      street: "",
-      city: ""
+      product: null,
+      name: "John Smith",
+      company: "Block Two",
+      address1: "42 Wallaby Way",
+      address2: "",
+      city: "Sydney",
+      state: "NSW",
+      country: "Australia",
+      postcode: "4550",
+      instructions: "Use it well."
     };
     this.onChange = this.onChange.bind(this);
+    this.fetchProduct = this.fetchProduct.bind(this);
   }
 
   onChange(e) {
     const { name, value } = e.target;
+    console.log(name, value)
     this.setState({ [name]: value });
   }
 
-  async fetchTable(tableName) {
-    console.log("fetching table");
+  async fetchProduct(id) {
+    console.log("fetching product", id);
     const { rows } = await eos.getTableRows(
       true,
       contractName,
       contractName,
       this.props.table
     );
-    this.setState({ rows });
-  }
-
-  async componentDidMount() {
-    this.fetchTable();
+    const product = rows.find(product => product.id === id);
+    this.setState({ product });
   }
 
   async onBuy(id) {
@@ -79,14 +88,19 @@ class ProductDetail extends Component {
     console.log(result);
   }
 
+  
+
   componentDidMount() {
-    this.onBuy();
+    const { productid } = this.props.match.params;
+    this.fetchProduct(productid)
+    console.log("*****", productid)
+    // this.onBuy();
   }
 
   render() {
     return (
       <div>
-        <Form onChange={this.onChange} buy={this.onBuy} {...this.state} />
+        <AddressForm onChange={this.onChange} buy={this.onBuy} {...this.state} />
       </div>
     );
   }
