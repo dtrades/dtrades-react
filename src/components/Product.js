@@ -13,6 +13,8 @@ import ViewTracking from '../components/ViewTracking';
 import ViewShipping from '../components/ViewShipping';
 import { shipping, shippingEncrypted, tracking, trackingEncrypted } from "../accounts";
 
+import { Link } from 'react-router-dom'
+
 const styles = theme => ({
   card: {
     display: 'flex',
@@ -45,7 +47,7 @@ const images = [
 ];
 
 function Product(props) {
-  const { classes, theme, id, seller, escrow, metadata, price, total_price } = props;
+  const { classes, theme, id, seller, escrow, metadata, price, total_price, shipping, tracking } = props;
   console.log(props);
   return (
     <Card className={classes.card}>
@@ -57,7 +59,7 @@ function Product(props) {
               />
             </Grid>
              <Grid item xs={6}>
-               <Typography variant="headline">Genuine Handwoven Basket</Typography>
+               <Typography variant="headline"><Link to={`/products/${id}`}>Genuine Handwoven Basket</Link></Typography>
                <Typography variant="subheading" color="textSecondary">
                  Sold by: {seller} (55)
                </Typography>
