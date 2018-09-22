@@ -21,20 +21,7 @@ class ProductDetail extends Component {
 
   async onBuy() {
     const { productid } = this.props.match.params;
-    console.log("buying product", productid);
-    const options = {
-      authorization: "dtradeseller@active",
-      broadcast: true,
-      sign: true
-    };
-    const response = await eos.transfer(
-      "dtradeseller",
-      "dtradebuyer1",
-      "0.0001 EOS",
-      "memo here",
-      options
-    );
-    console.log(response);
+    
   }
 
   componentDidMount() {
