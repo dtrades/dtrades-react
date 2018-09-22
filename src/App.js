@@ -16,7 +16,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import logo from './logo.svg';
 import './App.css';
-
 import Dashboard from './pagedraw/component_1';
 import Two from './pagedraw/component_2';
 import ProductDetail from './pages/ProductDetail';
