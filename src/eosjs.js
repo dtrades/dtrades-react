@@ -1,16 +1,5 @@
 import Eos from "eosjs";
-
-export const seller = {
-  accountName: "dtradeseller",
-  pub: "EOS5x2uxVezW7e4S5TQu9N7iFhZdFdzmkZzrSFcUt2xMqPcEVmQ2H",
-  priv: "5KCseM9bWMwmP8tL8C1MwcuVDGYHjwoNffBsD9gbAYhrBSrEqaU"
-};
-
-export const buyer = {
-  accountName: "dtradebuyer1",
-  pub: "EOS77acvYqW1VZo6Zm4PynAdeiJMLmtgW8cxxUVPAsqg4i34GjYRC",
-  priv: "5JXzKFmdWPMqorB47T1YDfKkVrvcSJ8j31HSLYv3iwd3uFFQ393"
-};
+import { buyer, seller } from "./accounts";
 
 export const contractName = "dtradesdapp1";
 

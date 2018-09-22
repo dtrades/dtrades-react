@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { eos, buyer, seller, contractName } from "../eosjs";
+import { eos, contractName } from "../eosjs";
+import { buyer, seller } from "../accounts";
 import Form from "../pagedraw/component_1";
 
 import { encrypt } from "eos-communication-lib";

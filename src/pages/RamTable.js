@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { eos, contractName } from "../eosjs";
-import Form from "../pagedraw/component_1";
-import AnItem from '../components/Product';
+import Product from '../components/Product';
 
 
-class ProductDetail extends Component {
+class RamTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,10 +31,10 @@ class ProductDetail extends Component {
       console.log(this.props.table, 'ggg')
     return (
       <div>
-        {this.state.rows.map(product => <AnItem key={product.id} {...product}/>)}
+        {this.state.rows.map(product => <Product key={product.id} {...product}/>)}
       </div>
     );
   }
 }
 
-export default ProductDetail;
+export default RamTable;
