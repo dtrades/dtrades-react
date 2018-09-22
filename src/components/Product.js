@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import SubmitTracking from '../components/SubmitTracking';
 import ViewTracking from '../components/ViewTracking';
 import ViewShipping from '../components/ViewShipping';
-import { shipping, shippingEncrypted, tracking, trackingEncrypted } from "../accounts";
+import * as accounts from "../accounts";
 
 import { Link } from 'react-router-dom'
 
@@ -71,8 +71,8 @@ function Product(props) {
                </Typography>
              </Grid>
              <Grid item xs={6} md={3}>
-               <ViewShipping encrypt={shippingEncrypted} decrypt={shipping}/>
-               <ViewTracking encrypt={trackingEncrypted} decrypt={tracking}/>
+               <ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>
+               <ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>
                <SubmitTracking/>
                <Button>Mark Received</Button>
              </Grid>
