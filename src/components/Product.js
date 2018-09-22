@@ -12,6 +12,8 @@ import SubmitTracking from '../components/SubmitTracking';
 import ViewTracking from '../components/ViewTracking';
 import ViewShipping from '../components/ViewShipping';
 
+import { Link } from 'react-router-dom'
+
 const styles = theme => ({
   card: {
     display: 'flex',
@@ -68,7 +70,7 @@ function MediaControlCard(props) {
               />
             </Grid>
              <Grid item xs={6}>
-               <Typography variant="headline">Genuine Handwoven Basket</Typography>
+               <Typography variant="headline"><Link to={`/products/${id}`}>Genuine Handwoven Basket</Link></Typography>
                <Typography variant="subheading" color="textSecondary">
                  Sold by: {seller} (55)
                </Typography>
