@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import SubmitTracking from '../components/SubmitTracking';
+import ViewTracking from '../components/ViewTracking';
 
 const styles = theme => ({
   card: {
@@ -66,8 +68,8 @@ function MediaControlCard(props) {
              </Grid>
              <Grid item xs={6} md={3}>
                <Button>View Details</Button>
-               <Button>View Tracking</Button>
-               <Button>Submit Tracking</Button>
+               <ViewTracking encrypt={'hashhashhash'} decrypt={'CA555555'}/>
+               <SubmitTracking/>
                <Button>Mark Received</Button>
              </Grid>
            </Grid>

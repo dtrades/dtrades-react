@@ -3,6 +3,7 @@ import { eos, contractName } from "../eosjs";
 import Form from "../pagedraw/component_1";
 import AnItem from '../components/Product';
 
+
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
