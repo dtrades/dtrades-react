@@ -15,7 +15,7 @@ const App = () => (
       <Link to={`/product/hello`}>Product</Link>
     </nav>
     <div>
-      <Route path="/" component={Dashboard}/>
+      {/*<Route path="/" component={Dashboard}/>*/}
       <Route path="/product/:productid" component={ProductDetail} />
       <Route path="/history/:accountname" component={Two} />
     </div>

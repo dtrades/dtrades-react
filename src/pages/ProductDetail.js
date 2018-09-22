@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import eos from "../eosjs";
+import Form from "../pagedraw/component_1";
 
 class ProductDetail extends Component {
-  state = {
-    name: "",
-    street: "",
-    city: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      street: "",
+      city: ""
+    };
+    this.onChange = this.onChange.bind(this);
+  }
 
-  onChange() {
-
+  onChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+    console.log(e.target.name, e.target.value);
   }
 
   async onBuy() {
@@ -27,17 +34,20 @@ class ProductDetail extends Component {
       "memo here",
       options
     );
-    console.log(response)
+    console.log(response);
   }
 
   componentDidMount() {
-      this.onBuy();
+    this.onBuy();
   }
 
   render() {
-      return <h1>Hello world,</h1>
+    return (
+      <div>
+        <Form onChange={this.onChange} {...this.state} />
+      </div>
+    );
   }
 }
-
 
 export default ProductDetail;

@@ -5,6 +5,7 @@ import './component_1.css';
 
 export default class Component_1 extends React.Component {
   render() {
+      console.log(this.props)
     return (
       <div className="component_1-component_1">
           <div className="component_1-0">
@@ -16,14 +17,16 @@ export default class Component_1 extends React.Component {
                   </div>
               </div>
           </div>
+          <form>
           <div className="component_1-1">
-              <input type="text" placeholder="Placeholder" className="component_1-text_input-9" /> 
+              <input type="text" placeholder="Name" name="name" value={this.props.name} onChange={(e) => this.props.onChange(e)} className="component_1-text_input-9" /> 
           </div>
           <div className="component_1-2">
               <div className="component_1-check_box-9">
                   <input type="checkbox" checked="true" className="component_1-2-0-0" /> 
               </div>
           </div>
+          </form>
       </div>
     );
   }
