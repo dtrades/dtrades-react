@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import eos from "../eosjs";
 
 class ProductDetail extends Component {
-  state = {};
+  state = {
+    name: "",
+    street: "",
+    city: ""
+  };
+
+  onChange() {
+
+  }
 
   async onBuy() {
     const { productid } = this.props.match.params;
@@ -15,7 +23,7 @@ class ProductDetail extends Component {
     const response = await eos.transfer(
       "dtradeseller",
       "dtradebuyer1",
-      "1.0000 EOS",
+      "0.0001 EOS",
       "memo here",
       options
     );
