@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { eos, buyer, seller, contractName } from "../eosjs";
 import Form from "../pagedraw/component_1";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Button from '@material-ui/core/Button';
+
 
 import { encrypt } from "eos-communication-lib";
 
-import AddressForm from '../components/AddressForm'
-
+import AddressForm from "../components/AddressForm";
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class ProductDetail extends Component {
       city: "Sydney",
       state: "NSW",
       country: "Australia",
-      postcode: "4550",
+      zip: "4550",
       instructions: "Use it well."
     };
     this.onChange = this.onChange.bind(this);
@@ -28,7 +31,7 @@ class ProductDetail extends Component {
 
   onChange(e) {
     const { name, value } = e.target;
-    console.log(name, value)
+    console.log(name, value);
     this.setState({ [name]: value });
   }
 
@@ -88,19 +91,33 @@ class ProductDetail extends Component {
     console.log(result);
   }
 
-  
-
   componentDidMount() {
     const { productid } = this.props.match.params;
-    this.fetchProduct(productid)
-    console.log("*****", productid)
+    this.fetchProduct(productid);
+    console.log("*****", productid);
     // this.onBuy();
   }
 
   render() {
     return (
       <div>
-        <AddressForm onChange={this.onChange} buy={this.onBuy} {...this.state} />
+        <div>
+          <Typography variant="title" gutterBottom>
+            Seller: 89
+          </Typography>
+          <Typography variant="title" gutterBottom>
+            Escrow: OK
+          </Typography>
+        </div>
+        <Divider />
+        <AddressForm
+          onChange={this.onChange}
+          buy={this.onBuy}
+          {...this.state}
+        />
+        <Button variant="contained" size="large" color="primary" >
+          Buy
+        </Button>
       </div>
     );
   }
