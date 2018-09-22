@@ -110,7 +110,7 @@ class ProductDetail extends Component {
     ];
 
     return (
-      <div>
+      <div className="container">
         <div className="topper">
             <div className="imageContainer">
               <img src={images[Math.floor(Math.random() * 4)]} />

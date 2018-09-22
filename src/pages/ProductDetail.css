@@ -5,9 +5,15 @@
 
 .topper {
     flex: 1;
-    width: 100%
+    width: 100%;
+    flex-direction: "row"
 }
 
 .x { 
     flex: 1
+}
+
+.container {
+    width:70%;
+    margin: auto;
 }
