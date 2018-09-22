@@ -6,6 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 
+import Grid from '@material-ui/core/Grid';
 import "./ProductDetail.css";
 
 import { encrypt } from "eos-communication-lib";
@@ -115,10 +116,13 @@ class ProductDetail extends Component {
     ) : (
       <div className="container">
         <div className="topper">
+        <Grid container spacing={24}>
+         <Grid item xs={6}>
           <div className="imageContainer">
             <img src={images[Math.floor(Math.random() * 4)]} />
           </div>
-
+          </Grid>
+          <Grid item xs={6}>
           <div className="x">
             <Typography variant="title" gutterBottom>
               Seller: 89
@@ -135,6 +139,8 @@ class ProductDetail extends Component {
               Price: {this.state.product.price}
             </Typography>
           </div>
+          </Grid>
+          </Grid>
         </div>
         <Divider />
         <AddressForm
