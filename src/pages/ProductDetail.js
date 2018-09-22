@@ -44,9 +44,10 @@ class ProductDetail extends Component {
       true,
       contractName,
       contractName,
-      this.props.table
+      "products"
     );
-    const product = rows.find(product => product.id === id);
+    const product = rows.filter(product => product.id == id)[0];
+    console.log("ended up with", rows, product);
     this.setState({ product });
   }
 
@@ -109,22 +110,30 @@ class ProductDetail extends Component {
       "https://a.1stdibscdn.com/archivesE/upload/1121189/f_96338111516708259050/9633811_master.jpg"
     ];
 
-    return (
+    return !this.state.product ? (
+      <h1>Loading...</h1>
+    ) : (
       <div className="container">
         <div className="topper">
-            <div className="imageContainer">
-              <img src={images[Math.floor(Math.random() * 4)]} />
-            </div>
-                
+          <div className="imageContainer">
+            <img src={images[Math.floor(Math.random() * 4)]} />
+          </div>
+
           <div className="x">
-          <Typography variant="title" gutterBottom>
-            Seller: 89
-          </Typography>
+            <Typography variant="title" gutterBottom>
+              Seller: 89
+            </Typography>
           </div>
           <div className="x">
-          <Typography variant="title" gutterBottom>
-            Escrow: OK
-          </Typography>
+            <Typography variant="title" gutterBottom>
+              Escrow: {this.state.product.escrow}
+            </Typography>
+            <Typography variant="title" gutterBottom>
+              Seller: {this.state.product.seller}
+            </Typography>
+            <Typography variant="title" gutterBottom>
+              Price: {this.state.product.price}
+            </Typography>
           </div>
         </div>
         <Divider />
