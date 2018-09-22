@@ -5,7 +5,7 @@ import './component_1.css';
 
 export default class Component_1 extends React.Component {
   render() {
-      console.log(this.props)
+    console.log('herefewhiufehwiu', this.props, 'go go go')
     return (
       <div className="component_1-component_1">
           <div className="component_1-0">
@@ -26,6 +26,10 @@ export default class Component_1 extends React.Component {
                   <input type="checkbox" checked="true" className="component_1-2-0-0" /> 
               </div>
           </div>
+          <button onClick={(e) => {
+              e.preventDefault();
+              this.props.buy()
+            }}>Buy</button>
           </form>
       </div>
     );
