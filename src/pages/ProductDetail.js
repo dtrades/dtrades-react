@@ -3,12 +3,15 @@ import { eos, buyer, seller, contractName } from "../eosjs";
 import Form from "../pagedraw/component_1";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import CardMedia from "@material-ui/core/CardMedia";
 
+import "./ProductDetail.css";
 
 import { encrypt } from "eos-communication-lib";
 
 import AddressForm from "../components/AddressForm";
+import ImgMediaCard from "../components/ImgMediaCard";
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -99,15 +102,30 @@ class ProductDetail extends Component {
   }
 
   render() {
+    const images = [
+      "https://cdn.shopify.com/s/files/1/2931/2708/products/8L5A2537_1000x.jpg",
+      "https://cdn.shopify.com/s/files/1/0993/9400/products/BABA_Pot_Basket_BABAPB27L_3_1024x1024.JPG",
+      "https://www.afrofood.com/wp-content/uploads/2012/08/hand-woven-african-basket.jpg",
+      "https://a.1stdibscdn.com/archivesE/upload/1121189/f_96338111516708259050/9633811_master.jpg"
+    ];
+
     return (
       <div>
-        <div>
+        <div className="topper">
+            <div className="imageContainer">
+              <img src={images[Math.floor(Math.random() * 4)]} />
+            </div>
+                
+          <div className="x">
           <Typography variant="title" gutterBottom>
             Seller: 89
           </Typography>
+          </div>
+          <div className="x">
           <Typography variant="title" gutterBottom>
             Escrow: OK
           </Typography>
+          </div>
         </div>
         <Divider />
         <AddressForm
@@ -115,7 +133,7 @@ class ProductDetail extends Component {
           buy={this.onBuy}
           {...this.state}
         />
-        <Button variant="contained" size="large" color="primary" >
+        <Button variant="contained" size="large" color="primary">
           Buy
         </Button>
       </div>

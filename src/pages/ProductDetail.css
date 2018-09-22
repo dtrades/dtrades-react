@@ -1,0 +1,13 @@
+.imageContainer {
+    width: 200px;
+    flex: 2
+}
+
+.topper {
+    flex: 1;
+    width: 100%
+}
+
+.x { 
+    flex: 1
+}
