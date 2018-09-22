@@ -14,7 +14,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import logo from './logo.svg';
+import logo from './logo-blue.svg';
+import logoWhite from './logo-white.svg';
 import './App.css';
 import Dashboard from './pagedraw/component_1';
 import Two from './pagedraw/component_2';
@@ -75,6 +76,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6,
   },
+  footerLogo: {
+    marginBottom: '-6px',
+  }
 });
 
 const App = props => {
@@ -83,9 +87,9 @@ const App = props => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="static" color="default" className={classes.appBar}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <img src={logo}/>
+          <img src={logoWhite}/>
         </Toolbar>
       </AppBar>
       <main>
@@ -110,7 +114,7 @@ const App = props => {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="title" align="center" gutterBottom>
-          Thanks for using DTrades
+          Thanks for using <img src={logo} className={classes.footerLogo}/>
         </Typography>
         <Typography variant="subheading" align="center" color="textSecondary" component="p">
           Made in a hurry by Team Computer Magic
