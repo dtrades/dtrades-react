@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { eos, contractName } from "../eosjs";
 import { buyer, seller } from "../accounts";
-import Form from "../pagedraw/component_1";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";

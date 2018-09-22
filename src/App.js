@@ -17,14 +17,11 @@ import { withStyles } from '@material-ui/core/styles';
 import logo from './logo-blue.svg';
 import logoWhite from './logo-white.svg';
 import './App.css';
-import Dashboard from './pagedraw/component_1';
 import Two from './pagedraw/component_2';
 import ProductDetail from './pages/ProductDetail';
 import RamTable from './pages/RamTable';
 
 import { Link, Route, Switch } from 'react-router-dom'
-
-
 
 
 const styles = theme => ({
