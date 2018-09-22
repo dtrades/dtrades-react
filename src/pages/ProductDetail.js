@@ -18,7 +18,6 @@ class ProductDetail extends Component {
   onChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-    console.log(e.target.name, e.target.value);
   }
 
   async onBuy() {
@@ -31,14 +30,9 @@ class ProductDetail extends Component {
       broadcast: true,
       sign: true
     };
-    const result = await eos.transfer(
-      buyer.accountName,
-      seller.accountName,
-      "0.0010 EOS",
-      cipherText,
-      options
-    );
-    console.log(result)
+    const data = await eos.getTableRows(true, 'dtradesdapp1', 'dtradesdapp1', 'products')
+    console.log(data)
+
   }
 
   componentDidMount() {
