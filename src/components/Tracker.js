@@ -44,44 +44,44 @@ class Tracker extends React.Component {
     }
     ws.onmessage = (e) => {
       if (e) {
-      const ws_message = JSON.parse(e.data);
+        const ws_message = JSON.parse(e.data);
 
-      switch (ws_message.type) {
-        case "ping":
-          console.log('ping');
-          break;
-        case "listening":
-          console.log('listening...');
-          break;
-        case "action_trace":
-          console.log("eosws:", ws_message.data.trace.act)
-          const {account, name, data} = ws_message.data.trace.act
+        switch (ws_message.type) {
+          case "ping":
+            console.log('ping');
+            break;
+          case "listening":
+            console.log('listening...');
+            break;
+          case "action_trace":
+            console.log("eosws:", ws_message.data.trace.act)
+            const {account, name, data} = ws_message.data.trace.act
 
-          // Message that will be added to snackbar
-          let message = "";
-          switch (account) {
-            case "dtradesdapp1":
-              switch(name) {
-                case "purchase":
-                  message = `Purchase by ${data.buyer} for Product #${data.product_id}`;
-                  break;
-                case "tracking":
-                  message = `Tracking for Order #${data.order_id}`
-                  break;
-                case "received":
-                  message = `Received Order #${data.order_id}`;
-                  break;
-              }
-              break;
-            case "eosio.token":
-              console.log(data);
-              if (name === "transfer") {
-                message = `Transfer ${data.from} to ${data.to} (${data.quantity})`;
-              }
+            // Message that will be added to snackbar
+            let message = "";
+            switch (account) {
+              case "dtradesdapp1":
+                switch(name) {
+                  case "purchase":
+                    message = `Purchase by ${data.buyer} for Product #${data.product_id}`;
+                    break;
+                  case "tracking":
+                    message = `Tracking for Order #${data.order_id}`
+                    break;
+                  case "received":
+                    message = `Received Order #${data.order_id}`;
+                    break;
+                }
+                break;
+              case "eosio.token":
+                console.log(data);
+                if (name === "transfer" && data.from === "dtradesdapp1" || data.to === "dtradesdapp1") {
+                  message = `Transfer ${data.from} to ${data.to} (${data.quantity})`;
+                }
+            }
+            if (message) this.setState({open: true, account, name, data, message});
+            break;
           }
-          if (message) this.setState({open: true, account, name, data, message});
-          break;
-        }
       }
     }
   }
