@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
-const AddressForm = ({ onChange, name, company, address1, address2, city, zip, country }) => {
+const AddressForm = ({ onChange, name, comp, add1, add2, city, zip, country }) => {
   return (
     <React.Fragment>
       <Typography variant="title" gutterBottom>
@@ -29,9 +29,9 @@ const AddressForm = ({ onChange, name, company, address1, address2, city, zip, c
           <TextField
             required
             onChange={onChange}
-            value={company}
-            id="company"
-            name="company"
+            value={comp}
+            id="comp"
+            name="comp"
             label="Company"
             fullWidth
             autoComplete="lname"
@@ -41,9 +41,9 @@ const AddressForm = ({ onChange, name, company, address1, address2, city, zip, c
           <TextField
             required
             onChange={onChange}
-            value={address1}
-            id="address1"
-            name="address1"
+            value={add1}
+            id="add1"
+            name="add1"
             label="Address line 1"
             fullWidth
             autoComplete="billing address-line1"

@@ -19,27 +19,25 @@ class ProductDetail extends Component {
     this.state = {
       product: null,
       name: "John Smith",
-      company: "Block Two",
-      address1: "42 Wallaby Way",
-      address2: "",
+      comp: "B2",
+      add1: "42 Wallaby Way",
+      add2: "",
       city: "Sydney",
       state: "NSW",
       country: "Australia",
       zip: "4550",
-      instructions: "Use it well."
     };
     this.onChange = this.onChange.bind(this);
     this.fetchProduct = this.fetchProduct.bind(this);
+    this.onBuy = this.onBuy.bind(this);
   }
 
   onChange(e) {
     const { name, value } = e.target;
-    console.log(name, value);
     this.setState({ [name]: value });
   }
 
   async fetchProduct(id) {
-    console.log("fetching product", id);
     const { rows } = await eos.getTableRows(
       true,
       contractName,
@@ -47,16 +45,15 @@ class ProductDetail extends Component {
       "products"
     );
     const product = rows.filter(product => product.id == id)[0];
-    console.log("ended up with", rows, product);
     this.setState({ product });
   }
 
   async onBuy(id) {
-    console.log("received", id);
     const { productid } = this.props.match.params;
     console.log(productid, "you have");
     const message = JSON.stringify({ ...this.state });
-    const cipherText = encrypt(buyer.priv, seller.pub, message);
+    console.log(message.length)
+    const cipherText = encrypt(buyer.priv, seller.pub, message, 900);
     console.log(JSON.stringify(cipherText));
     const options = {
       authorization: `${buyer.accountName}@active`,
@@ -142,7 +139,7 @@ class ProductDetail extends Component {
           buy={this.onBuy}
           {...this.state}
         />
-        <Button variant="contained" size="large" color="primary">
+        <Button onClick={this.onBuy} variant="contained" size="large" color="primary">
           Buy
         </Button>
       </div>
