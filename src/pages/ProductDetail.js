@@ -11,6 +11,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
+import { Route } from 'react-router-dom'
 
 import Grid from '@material-ui/core/Grid';
 
@@ -93,6 +94,7 @@ class ProductDetail extends Component {
       ]
     });
     this.setState({ processing: false })
+    this.props.history.push("/orders")
     console.log(result);
   }
 
