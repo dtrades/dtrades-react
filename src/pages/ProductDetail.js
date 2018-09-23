@@ -22,6 +22,8 @@ import { encrypt } from "eos-communication-lib";
 
 import AddressForm from "../components/AddressForm";
 import ImgMediaCard from "../components/ImgMediaCard";
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -36,7 +38,10 @@ class ProductDetail extends Component {
       city: "Sydney",
       state: "NSW",
       country: "Australia",
-      zip: "4550"
+      zip: "4550",
+      vertical: 'top', 
+      horizontal: 'right',
+      open: false
     };
     this.onChange = this.onChange.bind(this);
     this.fetchProduct = this.fetchProduct.bind(this);
@@ -94,8 +99,8 @@ class ProductDetail extends Component {
         }
       ]
     });
-    this.setState({ processing: false });
-    this.props.history.push("/orders");
+    this.setState({ processing: false, open: true });
+    // this.props.history.push("/orders");
     console.log(result);
   }
 
@@ -107,6 +112,7 @@ class ProductDetail extends Component {
   }
 
   render() {
+      const { vertical, horizontal, open} = this.state;
     return !this.state.product ? (
             <LinearProgress />
     ) : (
@@ -169,6 +175,15 @@ class ProductDetail extends Component {
         >
           {this.state.processing ? "Processing..." : "Buy"}
         </Button>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">I love snacks</span>}
+        />
       </div>
     );
   }
