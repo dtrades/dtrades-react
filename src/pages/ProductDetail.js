@@ -6,6 +6,10 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
 import "./ProductDetail.css";
 
 import { encrypt } from "eos-communication-lib";
@@ -25,7 +29,7 @@ class ProductDetail extends Component {
       city: "Sydney",
       state: "NSW",
       country: "Australia",
-      zip: "4550",
+      zip: "4550"
     };
     this.onChange = this.onChange.bind(this);
     this.fetchProduct = this.fetchProduct.bind(this);
@@ -52,7 +56,7 @@ class ProductDetail extends Component {
     const { productid } = this.props.match.params;
     console.log(productid, "you have");
     const message = JSON.stringify({ ...this.state });
-    console.log(message.length)
+    console.log(message.length);
     const cipherText = encrypt(buyer.priv, seller.pub, message, 900);
     console.log(JSON.stringify(cipherText));
     const options = {
@@ -117,20 +121,35 @@ class ProductDetail extends Component {
           </div>
 
           <div className="x">
-            <Typography variant="title" gutterBottom>
-              Seller: 89
-            </Typography>
+
           </div>
           <div className="x">
-            <Typography variant="title" gutterBottom>
-              Escrow: {this.state.product.escrow}
-            </Typography>
-            <Typography variant="title" gutterBottom>
-              Seller: {this.state.product.seller}
-            </Typography>
-            <Typography variant="title" gutterBottom>
-              Price: {this.state.product.price}
-            </Typography>
+            <List>
+              <ListItem>
+                <ListItemText
+                  primary="Seller Reputation"
+                  secondary="89"
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                  primary="Escrow"
+                  secondary={this.state.product.escrow}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                  primary="Seller"
+                  secondary={this.state.product.seller}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemText
+                  primary="Price"
+                  secondary={this.state.product.price}
+                />
+              </ListItem>
+            </List>
           </div>
         </div>
         <Divider />
@@ -139,7 +158,12 @@ class ProductDetail extends Component {
           buy={this.onBuy}
           {...this.state}
         />
-        <Button onClick={this.onBuy} variant="contained" size="large" color="primary">
+        <Button
+          onClick={this.onBuy}
+          variant="contained"
+          size="large"
+          color="primary"
+        >
           Buy
         </Button>
       </div>
