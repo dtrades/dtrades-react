@@ -18,7 +18,8 @@ import logo from './logo-blue.svg';
 import logoWhite from './logo-white.svg';
 import './App.css';
 import ProductDetail from './pages/ProductDetail';
-import RamTable from './pages/RamTable';
+import ProductTable from './pages/ProductTable';
+import OrderTable from './pages/OrderTable';
 import Tracker from './components/Tracker';
 
 import { Link, Route, Switch } from 'react-router-dom'
@@ -81,10 +82,10 @@ const App = props => {
         <div>
           {/*<Route path="/" component={Dashboard}/>*/}
           <Switch>
-            <Route exact path={`${match.path}/products`} render={(props) => <RamTable table="products" {...props}/>} />
+            <Route exact path={`${match.path}/products`} render={(props) => <ProductTable table="products" {...props}/>} />
             <Route path={`${match.path}/products/:productid`} component={ProductDetail} />
             <Route path={`${match.path}/orders/:productid`} component={ProductDetail} />
-            <Route exact path={`${match.path}/orders`} render={(props) => <RamTable table="orders" {...props}/>} />
+            <Route exact path={`${match.path}/orders`} render={(props) => <OrderTable table="orders" {...props}/>} />
             {/* <Route path="/orderbook/:account" component={RamTable} /> */}
             {/* <Route path="/history/:accountname" component={History} /> */}
             <Route path="/tracker" component={Tracker} />

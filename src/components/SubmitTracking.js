@@ -51,7 +51,7 @@ export default class FormDialog extends React.Component {
           }
         ]
       });
-      this.setState({ processing: false, open: true });
+      this.setState({ processing: false, open: false });
       // this.props.history.push("/orders");
       console.log(result);
     }

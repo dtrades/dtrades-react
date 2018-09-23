@@ -83,10 +83,10 @@ function Product(props) {
                ) : ('')}
              </Grid>
              <Grid item xs={12} md={3}>
-               {seller === account ? (<ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>) : ('')}
-               {buyer === account ? (<ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>) : ('')}
-               {seller === account ? (<SubmitTracking orderid={id}/>) : ('')}
-               {buyer === account ? (<MarkReceived orderid={id}/>) : ('')}
+               {seller === account && shipping ? (<ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>) : ('')}
+               {buyer === account && tracking ? (<ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>) : ('')}
+               {seller === account && shipping && !tracking ? (<SubmitTracking orderid={id}/>) : ('')}
+               {buyer === account && tracking && status != 'Received' ? (<MarkReceived orderid={id}/>) : ('')}
              </Grid>
            </Grid>
 

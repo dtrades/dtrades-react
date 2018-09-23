@@ -31,11 +31,11 @@ class RamTable extends Component {
 
   async componentDidMount() {
     this.fetchTable();
-    this.interval = setInterval(() => this.fetchTable(), 1000);
+    //this.interval = setInterval(() => this.fetchTable(), 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
   }
 
   render() {
