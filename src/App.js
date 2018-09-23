@@ -67,7 +67,7 @@ const App = props => {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <div className={classes.toolbarTitle}>
-            <img src={logoWhite}/>
+            <Link to={`/${account}/products`}><img src={logoWhite}/></Link>
           </div>
           <nav>
             <Link to={`/${account}/products`} className={classes.appButtons}><Button className={classes.appButtons}>Products</Button></Link>
