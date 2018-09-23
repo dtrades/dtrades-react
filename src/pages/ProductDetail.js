@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -106,7 +108,7 @@ class ProductDetail extends Component {
 
   render() {
     return !this.state.product ? (
-      <h1>Loading...</h1>
+            <LinearProgress />
     ) : (
       <div className="container">
         <div className="topper">

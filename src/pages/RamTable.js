@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { eos, contractName } from "../eosjs";
 import Product from '../components/Product';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 class RamTable extends Component {
@@ -28,7 +29,11 @@ class RamTable extends Component {
   }
 
   render() {
-      console.log(this.props.table, 'ggg')
+    if (this.state.rows.length === 0) {
+        return (
+            <LinearProgress />
+        )
+    }
     return (
       <div>
         {this.state.rows.map(product => <Product key={product.id} {...product}/>)}
