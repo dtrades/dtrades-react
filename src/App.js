@@ -19,6 +19,7 @@ import logoWhite from './logo-white.svg';
 import './App.css';
 import ProductDetail from './pages/ProductDetail';
 import RamTable from './pages/RamTable';
+import Tracker from './components/Tracker';
 
 import { Link, Route, Switch } from 'react-router-dom'
 
@@ -104,6 +105,7 @@ const App = props => {
             <Route path="/orders" render={(props) => <RamTable table="orders"/>} />
             <Route path="/orderbook/:account" component={RamTable} />
             {/* <Route path="/history/:accountname" component={History} /> */}
+            <Route path="/tracker" component={Tracker} />
           </Switch>
         </div>
       </main>
