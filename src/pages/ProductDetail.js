@@ -53,6 +53,10 @@ class ProductDetail extends Component {
     this.setState({ [name]: value });
   }
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   async fetchProduct(id) {
     const { rows } = await eos.getTableRows(
       true,
@@ -112,7 +116,7 @@ class ProductDetail extends Component {
   }
 
   render() {
-      const { vertical, horizontal, open} = this.state;
+      
     return !this.state.product ? (
             <LinearProgress />
     ) : (
@@ -176,8 +180,8 @@ class ProductDetail extends Component {
           {this.state.processing ? "Processing..." : "Buy"}
         </Button>
         <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={open}
+          anchorOrigin={{ vertical: this.state.vertical, horizontal: this.state.horizontal }}
+          open={this.state.open}
           onClose={this.handleClose}
           ContentProps={{
             'aria-describedby': 'message-id',
