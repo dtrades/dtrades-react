@@ -9,10 +9,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 const AddressForm = ({ onChange, name, comp, add1, add2, city, zip, country }) => {
   return (
     <React.Fragment>
-      <Typography variant="title" gutterBottom>
-        Address
-      </Typography>
+
       <Grid container spacing={24}>
+        <Grid item xs={12}>
+        <Typography variant="title" gutterBottom>
+          Address
+        </Typography>
+        </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
