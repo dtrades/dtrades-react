@@ -58,7 +58,7 @@ const styles = theme => ({
 
 const App = props => {
   const { classes, match } = props;
-  const { account } = match ? match.params : 'dtradeseller';
+  const account = match ? match.params.account : 'dtradeseller';
   console.log(props);
 
   return (
@@ -70,8 +70,8 @@ const App = props => {
             <img src={logoWhite}/>
           </div>
           <nav>
-            <Link to={`products`} className={classes.appButtons}><Button className={classes.appButtons}>Products</Button></Link>
-            <Link to={`orders`} className={classes.appButtons}><Button className={classes.appButtons}>Orders</Button></Link>
+            <Link to={`/${account}/products`} className={classes.appButtons}><Button className={classes.appButtons}>Products</Button></Link>
+            <Link to={`/${account}/orders`} className={classes.appButtons}><Button className={classes.appButtons}>Orders</Button></Link>
           </nav>
           <Button className={classes.appButtons}>{ account }</Button>
         </Toolbar>
@@ -80,9 +80,10 @@ const App = props => {
         <div>
           {/*<Route path="/" component={Dashboard}/>*/}
           <Switch>
-            <Route exact path={`${match.path}/products`} render={(props) => <RamTable table="products"/>} />
+            <Route exact path={`${match.path}/products`} render={(props) => <RamTable table="products" {...props}/>} />
             <Route path={`${match.path}/products/:productid`} component={ProductDetail} />
-            <Route exact path={`${match.path}/orders`} render={(props) => <RamTable table="orders"/>} />
+            <Route path={`${match.path}/orders/:productid`} component={ProductDetail} />
+            <Route exact path={`${match.path}/orders`} render={(props) => <RamTable table="orders" {...props}/>} />
             {/* <Route path="/orderbook/:account" component={RamTable} /> */}
             {/* <Route path="/history/:accountname" component={History} /> */}
             <Route path="/tracker" component={Tracker} />

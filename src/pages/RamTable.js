@@ -7,6 +7,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 class RamTable extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
         rows: []
     };
@@ -42,7 +43,7 @@ class RamTable extends Component {
     }
     return (
       <div>
-        {this.state.rows.map(product => <Product key={product.id} {...product}/>)}
+        {this.state.rows.map(product => <Product key={product.id} {...product} path={this.props.match.url}/>)}
       </div>
     );
   }

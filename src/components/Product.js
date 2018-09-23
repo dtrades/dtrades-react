@@ -65,7 +65,7 @@ function Product(props) {
               />
             </Grid>
              <Grid item xs={6}>
-               <Typography variant="headline" color="textSecondary"><Link to={`/products/${id}`} className={classes.link}>Genuine Handwoven Basket</Link></Typography>
+               <Typography variant="headline" color="textSecondary"><Link to={`${props.path}/${id}`} className={classes.link}>Genuine Handwoven Basket</Link></Typography>
                <Typography variant="subheading" color="textSecondary">
                  Sold by: {seller} (55)
                </Typography>
