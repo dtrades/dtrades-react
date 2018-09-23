@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { eos, contractName } from "../eosjs";
+import * as EosWebSocket from "../eosws/eosws";
 import Product from '../components/Product';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -30,8 +31,30 @@ class RamTable extends Component {
   }
 
   async componentDidMount() {
+    const ws = new WebSocket("ws://35.203.114.193/v1/stream")
+    ws.onopen = () => {
+      ws.send(EosWebSocket.get_actions("dtradesdapp1", "purchase"));
+      ws.send(EosWebSocket.get_actions("dtradesdapp1", "tracking"));
+      ws.send(EosWebSocket.get_actions("dtradesdapp1", "received"));
+    }
+    ws.onmessage = (e) => {
+      if (e) {
+        const ws_message = JSON.parse(e.data);
+
+        switch (ws_message.type) {
+          case "ping":
+            console.log('OrderTable.ping');
+            break;
+          case "listening":
+            console.log('OrderTable.listening...');
+            break;
+          case "action_trace":
+            console.log("OrderTable.eosws:", ws_message.data.trace.act);
+            this.fetchTable();
+        }
+      }
+    }
     this.fetchTable();
-    //this.interval = setInterval(() => this.fetchTable(), 1000);
   }
 
   componentWillUnmount() {

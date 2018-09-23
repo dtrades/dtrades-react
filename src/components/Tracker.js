@@ -48,13 +48,13 @@ class Tracker extends React.Component {
 
         switch (ws_message.type) {
           case "ping":
-            console.log('ping');
+            console.log('Tracker.ping');
             break;
           case "listening":
-            console.log('listening...');
+            console.log('Tracker.listening...');
             break;
           case "action_trace":
-            console.log("eosws:", ws_message.data.trace.act)
+            console.log("Tracker.eosws:", ws_message.data.trace.act)
             const {account, name, data} = ws_message.data.trace.act
 
             // Message that will be added to snackbar
