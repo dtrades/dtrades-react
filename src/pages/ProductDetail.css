@@ -10,10 +10,15 @@
 }
 
 .x { 
-    flex: 1
+    padding-left: 80px;
 }
 
 .container {
     width:70%;
     margin: auto;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }

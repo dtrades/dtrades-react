@@ -26,6 +26,7 @@ class ProductDetail extends Component {
     super(props);
     this.state = {
       product: null,
+      processing: false,
       name: "John Smith",
       comp: "B2",
       add1: "42 Wallaby Way",
@@ -57,25 +58,19 @@ class ProductDetail extends Component {
   }
 
   async onBuy(id) {
+      console.log(buyer)
     const { productid } = this.props.match.params;
+    this.setState({ processing: true })
     console.log(productid, "you have");
     const message = JSON.stringify({ ...this.state });
     console.log(message.length);
     const cipherText = encrypt(buyer.priv, seller.pub, message, 900);
     console.log(JSON.stringify(cipherText));
     const options = {
-      authorization: `${buyer.accountName}@active`,
+      authorization: `${buyer.username}@active`,
       broadcast: true,
       sign: true
     };
-    const x = await eos.transfer(
-      buyer.accountName,
-      seller.accountName,
-      "1.0000 EOS",
-      "working",
-      options
-    );
-    console.log(x);
     // To push transaction
     const result = await eos.transaction({
       actions: [
@@ -84,12 +79,12 @@ class ProductDetail extends Component {
           name: "purchase",
           authorization: [
             {
-              actor: buyer.accountName,
+              actor: buyer.username,
               permission: "active"
             }
           ],
           data: {
-            buyer: buyer.accountName,
+            buyer: buyer.username,
             product_id: 0,
             quantity: 1,
             shipping: cipherText
@@ -97,6 +92,7 @@ class ProductDetail extends Component {
         }
       ]
     });
+    this.setState({ processing: false })
     console.log(result);
   }
 
@@ -121,9 +117,6 @@ class ProductDetail extends Component {
           </div>
           </Grid>
           <Grid item xs={6}>
-          <div className="x">
-
-          </div>
           <div className="x">
             <List>
               <ListItem>
@@ -163,11 +156,12 @@ class ProductDetail extends Component {
         />
         <Button
           onClick={this.onBuy}
+          className="center"
           variant="contained"
           size="large"
           color="primary"
         >
-          Buy
+          {this.state.processing? 'Processing...' : 'Buy'}
         </Button>
       </div>
     );
