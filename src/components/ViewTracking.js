@@ -32,8 +32,8 @@ export default class FormDialog extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button onClick={this.handleClickOpen}>View Tracking</Button>
+      <React.Fragment>
+      <Button onClick={this.handleClickOpen} color="primary" variant="outlined" style={{margin:'10px'}}>View Tracking</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -56,7 +56,7 @@ export default class FormDialog extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </React.Fragment>
     );
   }
 }

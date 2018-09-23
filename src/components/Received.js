@@ -6,53 +6,44 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import DoneIcon from '@material-ui/icons/Done';
+
 
 export default class FormDialog extends React.Component {
 
-  constructor(props) {
-    super(props);
-    // Don't call this.setState() here!
-    this.state = { open: false, show: false };
-  }
+  state = {
+    open: false,
+  };
 
   handleClickOpen = () => {
-    this.setState({ open: true, show: this.state.show });
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({ open: false, show: this.state.show });
-  };
-
-  handleDecrypt = () => {
-    this.setState({ open: this.state.open, show: true });
+    this.setState({ open: false });
   };
 
   render() {
     return (
       <React.Fragment>
-      <Button onClick={this.handleClickOpen} color="primary" variant="outlined" style={{margin:'10px'}}>View Shipping</Button>
+      <Button onClick={this.handleClickOpen} color="primary" variant="outlined" style={{margin:'10px'}}>Mark Received</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Shipping Information</DialogTitle>
+          <DialogTitle id="form-dialog-title">Mark Received</DialogTitle>
           <DialogContent>
-            {this.state.show ? (<LockOpenOutlinedIcon/>) : (<LockOutlinedIcon/>)}
             <DialogContentText>
-              {this.state.show ? (JSON.stringify(this.props.decrypt, null, 2)) : this.props.encrypt }
+              Have you received this product? This action is irreversible.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
-              Close
+              Cancel
             </Button>
-            <Button onClick={this.handleDecrypt} color="primary">
-              {this.state.show ? (<DoneIcon/>) : (<LockOpenOutlinedIcon/>)}
-              {this.state.show ? 'Decrypted' : 'Decrypt' }
+            <Button onClick={this.handleClose} color="primary">
+              Confirmed
             </Button>
           </DialogActions>
         </Dialog>

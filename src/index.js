@@ -4,11 +4,10 @@ import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 
-import { BrowserRouter } from "react-router-dom";
-
+import { BrowserRouter, Route } from "react-router-dom";
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Route path='/:account' component={App}/>
   </BrowserRouter>,
   document.getElementById("root")
 );

@@ -28,6 +28,12 @@ class RamTable extends Component {
     this.fetchTable();
   }
 
+  async componentDidUpdate(prevProps) {
+    if(prevProps.path !== this.props.path) {
+      this.fetchTable();
+    }
+  }
+
   render() {
     if (this.state.rows.length === 0) {
         return (

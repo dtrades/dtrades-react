@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import SubmitTracking from '../components/SubmitTracking';
 import ViewTracking from '../components/ViewTracking';
 import ViewShipping from '../components/ViewShipping';
+import MarkReceived from '../components/Received';
 import * as accounts from "../accounts";
 import "./Product.css";
 
@@ -30,6 +31,10 @@ const styles = theme => ({
     width: 151,
     height: 151,
   },
+  link: {
+    textDecorationLine: 'none',
+    color: 'inherit'
+  }
 });
 
 // <div>
@@ -60,7 +65,7 @@ function Product(props) {
               />
             </Grid>
              <Grid item xs={6}>
-               <Typography variant="headline"><Link to={`/products/${id}`}>Genuine Handwoven Basket</Link></Typography>
+               <Typography variant="headline" color="textSecondary"><Link to={`/products/${id}`} className={classes.link}>Genuine Handwoven Basket</Link></Typography>
                <Typography variant="subheading" color="textSecondary">
                  Sold by: {seller} (55)
                </Typography>
@@ -71,11 +76,11 @@ function Product(props) {
                  Price: {price || total_price} (each)
                </Typography>
              </Grid>
-             <Grid item xs={6} md={3}>
+             <Grid item xs={12} md={3}>
                <ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>
                <ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>
                <SubmitTracking/>
-               <Button>Mark Received</Button>
+               <MarkReceived/>
              </Grid>
            </Grid>
 

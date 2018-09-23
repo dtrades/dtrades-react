@@ -27,23 +27,10 @@ import { Link, Route, Switch } from 'react-router-dom'
 const styles = theme => ({
   appBar: {
     position: 'relative',
+    padding: '10px',
   },
   toolbarTitle: {
     flex: 1,
-  },
-  icon: {
-    marginRight: theme.spacing.unit * 2,
-  },
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  heroContent: {
-    maxWidth: 600,
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
-  },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4,
   },
   layout: {
     width: 'auto',
@@ -55,55 +42,48 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
-  cardGrid: {
-    padding: `${theme.spacing.unit * 8}px 0`,
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6,
   },
   footerLogo: {
     marginBottom: '-6px',
+  },
+  appButtons: {
+    color: 'white',
+    textDecorationLine: 'none',
   }
+
 });
 
 const App = props => {
-  const {classes} = props;
+  const { classes, match } = props;
+  const { account } = match ? match.params : 'dtradeseller';
+  console.log(props);
 
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <img src={logoWhite}/>
+          <div className={classes.toolbarTitle}>
+            <img src={logoWhite}/>
+          </div>
+          <nav>
+            <Link to={`products`} className={classes.appButtons}><Button className={classes.appButtons}>Products</Button></Link>
+            <Link to={`orders`} className={classes.appButtons}><Button className={classes.appButtons}>Orders</Button></Link>
+          </nav>
+          <Button className={classes.appButtons}>{ account }</Button>
         </Toolbar>
       </AppBar>
       <main>
-        <nav>
-          <Link to="/">Dashboard</Link>
-          <Link to={`/products`}>Products</Link>
-          <Link to={`/orders`}>Orders</Link>
-          <Link to={`/history/dtradebuyer1`}>History</Link>
-          <Link to={`/product/hello`}>Product</Link>
-        </nav>
         <div>
           {/*<Route path="/" component={Dashboard}/>*/}
           <Switch>
-            <Route exact path="/products" render={(props) => <RamTable table="products"/>} />
-            <Route path="/products/:productid" component={ProductDetail} />
-            <Route path="/orders" render={(props) => <RamTable table="orders"/>} />
-            <Route path="/orderbook/:account" component={RamTable} />
+            <Route exact path={`${match.path}/products`} render={(props) => <RamTable table="products"/>} />
+            <Route path={`${match.path}/products/:productid`} component={ProductDetail} />
+            <Route exact path={`${match.path}/orders`} render={(props) => <RamTable table="orders"/>} />
+            {/* <Route path="/orderbook/:account" component={RamTable} /> */}
             {/* <Route path="/history/:accountname" component={History} /> */}
             <Route path="/tracker" component={Tracker} />
           </Switch>
