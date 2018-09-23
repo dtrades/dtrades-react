@@ -83,7 +83,9 @@ class ProductDetail extends Component {
       sign: true
     };
     // To push transaction
-    const result = await eos.transaction({
+    let result
+    try {
+result = await eos.transaction({
       actions: [
         {
           account: contractName,
@@ -103,8 +105,11 @@ class ProductDetail extends Component {
         }
       ]
     });
+    } catch(e) {
+        console.log('Slight bother', e)
+    }
     this.setState({ processing: false, open: true });
-    // this.props.history.push("/orders");
+    this.props.history.push("/dtradebuyer1/orders");
     console.log(result);
   }
 
