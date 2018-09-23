@@ -31,6 +31,7 @@ class ProductDetail extends Component {
     this.state = {
       product: null,
       processing: false,
+      txid: "",
       name: "John Smith",
       comp: "B2",
       add1: "42 Wallaby Way",
@@ -108,7 +109,8 @@ result = await eos.transaction({
     } catch(e) {
         console.log('Slight bother', e)
     }
-    this.setState({ processing: false, open: true });
+    console.log('result', result)
+    this.setState({ processing: false, open: true, txid: result.transaction_id });
     this.props.history.push("/dtradebuyer1/orders");
     console.log(result);
   }
@@ -117,7 +119,6 @@ result = await eos.transaction({
     const { productid } = this.props.match.params;
     this.fetchProduct(productid);
     console.log("*****", productid);
-    // this.onBuy();
   }
 
   render() {
@@ -191,7 +192,7 @@ result = await eos.transaction({
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">I love snacks</span>}
+          message={<span id="message-id">{this.state.txid}</span>}
         />
       </div>
     );
