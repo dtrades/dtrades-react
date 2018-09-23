@@ -43,7 +43,7 @@ export default class FormDialog extends React.Component {
           <DialogContent>
             {this.state.show ? (<LockOpenOutlinedIcon/>) : (<LockOutlinedIcon/>)}
             <DialogContentText>
-              {this.state.show ? (<pre>{JSON.stringify(this.props.decrypt, null, 2)}</pre>) : this.props.encrypt }
+              {this.state.show ? (JSON.stringify(this.props.decrypt, null, 2)) : this.props.encrypt }
             </DialogContentText>
           </DialogContent>
           <DialogActions>

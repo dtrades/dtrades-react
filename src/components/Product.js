@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import SubmitTracking from '../components/SubmitTracking';
 import ViewTracking from '../components/ViewTracking';
 import ViewShipping from '../components/ViewShipping';
+import * as accounts from "../accounts";
+import "./Product.css";
 
 import { Link } from 'react-router-dom'
 
@@ -45,19 +47,7 @@ const images = [
   "https://a.1stdibscdn.com/archivesE/upload/1121189/f_96338111516708259050/9633811_master.jpg"
 ];
 
-const shipping = {
-  name: "Buyer McBuyer",
-  company: "",
-  address1: "123 Fake Street",
-  address2: "Unit 456",
-  city: "Calgary",
-  state: "Alberta",
-  country: "Canada",
-  postcode: "12345",
-  instructions:"Leave under my mat"
-};
-
-function MediaControlCard(props) {
+function Product(props) {
   const { classes, theme, id, seller, escrow, metadata, price, total_price, shipping, tracking } = props;
   console.log(props);
   return (
@@ -82,8 +72,8 @@ function MediaControlCard(props) {
                </Typography>
              </Grid>
              <Grid item xs={6} md={3}>
-               <ViewShipping encrypt={'hashhashhash'} decrypt={shipping}/>
-               <ViewTracking encrypt={'hashhashhash'} decrypt={'CA555555'}/>
+               <ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>
+               <ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>
                <SubmitTracking/>
                <Button>Mark Received</Button>
              </Grid>
@@ -93,9 +83,9 @@ function MediaControlCard(props) {
   );
 }
 
-MediaControlCard.propTypes = {
+Product.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(MediaControlCard);
+export default withStyles(styles, { withTheme: true })(Product);

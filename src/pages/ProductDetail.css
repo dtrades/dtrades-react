@@ -1,6 +1,6 @@
 .imageContainer {
-    width: 200px;
-    flex: 2
+
+    max-width: 320px;
 }
 
 .topper {

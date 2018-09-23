@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { eos, buyer, seller, contractName } from "../eosjs";
-import Form from "../pagedraw/component_1";
+import { eos, contractName } from "../eosjs";
+import { buyer, seller } from "../accounts";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+
+
+import Grid from '@material-ui/core/Grid';
 
 import "./ProductDetail.css";
 
@@ -104,22 +108,19 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const images = [
-      "https://cdn.shopify.com/s/files/1/2931/2708/products/8L5A2537_1000x.jpg",
-      "https://cdn.shopify.com/s/files/1/0993/9400/products/BABA_Pot_Basket_BABAPB27L_3_1024x1024.JPG",
-      "https://www.afrofood.com/wp-content/uploads/2012/08/hand-woven-african-basket.jpg",
-      "https://a.1stdibscdn.com/archivesE/upload/1121189/f_96338111516708259050/9633811_master.jpg"
-    ];
 
     return !this.state.product ? (
       <h1>Loading...</h1>
     ) : (
       <div className="container">
         <div className="topper">
+        <Grid container spacing={24}>
+         <Grid item xs={6}>
           <div className="imageContainer">
-            <img src={images[Math.floor(Math.random() * 4)]} />
+            <img src={"https://www.afrofood.com/wp-content/uploads/2012/08/hand-woven-african-basket.jpg"} />
           </div>
-
+          </Grid>
+          <Grid item xs={6}>
           <div className="x">
 
           </div>
@@ -151,6 +152,8 @@ class ProductDetail extends Component {
               </ListItem>
             </List>
           </div>
+          </Grid>
+          </Grid>
         </div>
         <Divider />
         <AddressForm

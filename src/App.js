@@ -17,14 +17,10 @@ import { withStyles } from '@material-ui/core/styles';
 import logo from './logo-blue.svg';
 import logoWhite from './logo-white.svg';
 import './App.css';
-import Dashboard from './pagedraw/component_1';
-import Two from './pagedraw/component_2';
 import ProductDetail from './pages/ProductDetail';
 import RamTable from './pages/RamTable';
 
 import { Link, Route, Switch } from 'react-router-dom'
-
-
 
 
 const styles = theme => ({
@@ -107,7 +103,7 @@ const App = props => {
             <Route path="/products/:productid" component={ProductDetail} />
             <Route path="/orders" render={(props) => <RamTable table="orders"/>} />
             <Route path="/orderbook/:account" component={RamTable} />
-            <Route path="/history/:accountname" component={Two} />
+            {/* <Route path="/history/:accountname" component={History} /> */}
           </Switch>
         </div>
       </main>
