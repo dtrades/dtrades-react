@@ -63,6 +63,7 @@ const App = props => {
 
   return (
     <React.Fragment>
+      <Tracker />
       <CssBaseline />
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
