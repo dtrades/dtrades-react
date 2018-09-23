@@ -16,23 +16,26 @@ class RamTable extends Component {
 
   async fetchTable(tableName) {
     console.log("fetching table");
-    const { rows } = await eos.getTableRows(
-      true,
-      contractName,
-      contractName,
-      this.props.table
-    );
-    this.setState({ rows })
+    const table = {
+        json: true,
+        scope: contractName,
+        code: contractName,
+        table: this.props.table,
+        limit: 1000
+    }
+    const { rows } = await eos.getTableRows(table);
+    const filtered = rows.filter(r=>r.seller === 'dtradeseller').sort(r=>r.id);
+    console.log(filtered);
+    this.setState({rows: filtered})
   }
 
   async componentDidMount() {
     this.fetchTable();
+    this.interval = setInterval(() => this.fetchTable(), 1000);
   }
 
-  async componentDidUpdate(prevProps) {
-    if(prevProps.path !== this.props.path) {
-      this.fetchTable();
-    }
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
@@ -43,7 +46,7 @@ class RamTable extends Component {
     }
     return (
       <div>
-        {this.state.rows.map(product => <Product key={product.id} {...product} path={this.props.match.url}/>)}
+        {this.state.rows.map(product => <Product key={product.id} {...product} {...this.props} path={this.props.match.url}/>)}
       </div>
     );
   }

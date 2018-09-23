@@ -8,8 +8,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
+import { eos, contractName } from "../eosjs";
+import { buyer, seller } from "../accounts";
+
 
 export default class FormDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
 
   state = {
     open: false,
@@ -22,6 +29,35 @@ export default class FormDialog extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  async onReceived(id) {
+    const options = {
+      authorization: `${buyer.username}@active`,
+      broadcast: true,
+      sign: true
+    };
+    // To push transaction
+    const result = await eos.transaction({
+      actions: [
+        {
+          account: contractName,
+          name: "received",
+          authorization: [
+            {
+              actor: buyer.username,
+              permission: "active"
+            }
+          ],
+          data: {
+            order_id: id,
+          }
+        }
+      ]
+    });
+    this.setState({ processing: false, open: true });
+    // this.props.history.push("/orders");
+    console.log(result);
+  }
 
   render() {
     return (
@@ -42,7 +78,7 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={() => {this.onReceived(this.props.orderid)}} color="primary">
               Confirmed
             </Button>
           </DialogActions>

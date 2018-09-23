@@ -8,6 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
+import { eos, contractName } from "../eosjs";
+import { buyer, seller, trackingEncrypted } from "../accounts";
+
 export default class FormDialog extends React.Component {
 
   state = {
@@ -21,6 +24,37 @@ export default class FormDialog extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+
+    async onReceived(id) {
+      const options = {
+        authorization: `${buyer.username}@active`,
+        broadcast: true,
+        sign: true
+      };
+      // To push transaction
+      const result = await eos.transaction({
+        actions: [
+          {
+            account: contractName,
+            name: "tracking",
+            authorization: [
+              {
+                actor: seller.username,
+                permission: "active"
+              }
+            ],
+            data: {
+              order_id: id,
+              details: trackingEncrypted
+            }
+          }
+        ]
+      });
+      this.setState({ processing: false, open: true });
+      // this.props.history.push("/orders");
+      console.log(result);
+    }
 
   render() {
     return (
@@ -42,6 +76,7 @@ export default class FormDialog extends React.Component {
               id="name"
               label="Tracking Number"
               type="text"
+              value="A1399877333"
               fullWidth
             />
           </DialogContent>
@@ -49,7 +84,7 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={() => {this.onReceived(this.props.orderid)}}  color="primary">
               <LockOutlinedIcon/>Encrypt
             </Button>
           </DialogActions>

@@ -118,7 +118,7 @@ result = await eos.transaction({
           ],
           data: {
             buyer: buyer.username,
-            product_id: 0,
+            product_id: id,
             quantity: 1,
             shipping: cipherText
           }
@@ -144,7 +144,7 @@ result = await eos.transaction({
 
   render() {
     const { classes } = this.props;
-
+    const { productid } = this.props.match.params;
     return !this.state.product ? (
             <LinearProgress />
     ) : (
@@ -207,7 +207,7 @@ result = await eos.transaction({
             </Grid>
             <Grid item xs={12}>
               <Button
-                onClick={this.onBuy}
+                onClick={()=>{this.onBuy(productid)}}
                 className="center"
                 variant="contained"
                 size="large"

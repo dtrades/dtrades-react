@@ -46,22 +46,23 @@ const styles = theme => ({
 // </div>
 
 const images = [
-  "https://cdn.shopify.com/s/files/1/2931/2708/products/8L5A2537_1000x.jpg",
+  "https://www.afrofood.com/wp-content/uploads/2012/08/hand-woven-african-basket.jpg",
   "https://cdn.shopify.com/s/files/1/0993/9400/products/BABA_Pot_Basket_BABAPB27L_3_1024x1024.JPG",
   "https://www.afrofood.com/wp-content/uploads/2012/08/hand-woven-african-basket.jpg",
   "https://a.1stdibscdn.com/archivesE/upload/1121189/f_96338111516708259050/9633811_master.jpg"
 ];
 
 function Product(props) {
-  const { classes, theme, id, seller, escrow, metadata, price, total_price, shipping, tracking } = props;
-  console.log(props);
+  const { classes, theme, id, seller, buyer, escrow, metadata, price, total_price, shipping, tracking, status, ...other } = props;
+  const { match : { params: {account} } } = other;
+  console.log(account);
   return (
     <Card className={classes.card}>
            <Grid container spacing={24}>
             <Grid item xs={6} md={3}>
               <CardMedia
                 className={classes.cover}
-                image={images[Math.floor(Math.random() * 4)]}
+                image={images[0]}
               />
             </Grid>
              <Grid item xs={6}>
@@ -75,12 +76,17 @@ function Product(props) {
                <Typography variant="subheading" color="textSecondary">
                  Price: {price || total_price} (each)
                </Typography>
+               {status ? (
+                 <Typography variant="subheading" color="textSecondary">
+                   Status: {status}
+                 </Typography>
+               ) : ('')}
              </Grid>
              <Grid item xs={12} md={3}>
-               <ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>
-               <ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>
-               <SubmitTracking/>
-               <MarkReceived/>
+               {seller === account ? (<ViewShipping encrypt={accounts.shippingEncrypted} decrypt={accounts.shipping}/>) : ('')}
+               {buyer === account ? (<ViewTracking encrypt={accounts.trackingEncrypted} decrypt={accounts.tracking}/>) : ('')}
+               {seller === account ? (<SubmitTracking orderid={id}/>) : ('')}
+               {buyer === account ? (<MarkReceived orderid={id}/>) : ('')}
              </Grid>
            </Grid>
 
