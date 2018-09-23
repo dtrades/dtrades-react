@@ -6,7 +6,8 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import CardMedia from "@material-ui/core/CardMedia";
 import LinearProgress from '@material-ui/core/LinearProgress';
-
+import Card from '@material-ui/core/Card';
+import { withStyles } from '@material-ui/core/styles';
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -24,6 +25,24 @@ import AddressForm from "../components/AddressForm";
 import ImgMediaCard from "../components/ImgMediaCard";
 import Snackbar from '@material-ui/core/Snackbar';
 
+const styles = theme => ({
+  card: {
+    display: 'flex',
+    padding: '20px',
+    margin: '20px',
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cover: {
+    width: 320,
+  },
+  link: {
+    textDecorationLine: 'none',
+    color: 'inherit'
+  }
+});
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -40,7 +59,7 @@ class ProductDetail extends Component {
       state: "NSW",
       country: "Australia",
       zip: "4550",
-      vertical: 'top', 
+      vertical: 'top',
       horizontal: 'right',
       open: false
     };
@@ -121,22 +140,26 @@ result = await eos.transaction({
     console.log("*****", productid);
   }
 
+
+
   render() {
-      
+    const { classes } = this.props;
+
     return !this.state.product ? (
             <LinearProgress />
     ) : (
       <div className="container">
         <div className="topper">
+        <Card className={classes.card}>
           <Grid container spacing={24}>
             <Grid item xs={6}>
-              <div className="imageContainer">
-                <img
+              <CardMedia>
+                <img className={classes.cover}
                   src={
                     "https://www.afrofood.com/wp-content/uploads/2012/08/hand-woven-african-basket.jpg"
                   }
                 />
-              </div>
+              </CardMedia>
             </Grid>
             <Grid item xs={6}>
               <div className="x">
@@ -169,34 +192,36 @@ result = await eos.transaction({
               </div>
             </Grid>
           </Grid>
+          </Card>
         </div>
-        <Divider />
-        <AddressForm
-          onChange={this.onChange}
-          buy={this.onBuy}
-          {...this.state}
-        />
-        <Button
-          onClick={this.onBuy}
-          className="center"
-          variant="contained"
-          size="large"
-          color="primary"
-        >
-          {this.state.processing ? "Processing..." : "Buy"}
-        </Button>
-        <Snackbar
-          anchorOrigin={{ vertical: this.state.vertical, horizontal: this.state.horizontal }}
-          open={this.state.open}
-          onClose={this.handleClose}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">{this.state.txid}</span>}
-        />
+
+        <Card className={classes.card}>
+
+          <Grid container spacing={24}>
+            <Grid item xs={12}>
+              <AddressForm
+                onChange={this.onChange}
+                buy={this.onBuy}
+                {...this.state}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                onClick={this.onBuy}
+                className="center"
+                variant="contained"
+                size="large"
+                color="primary"
+              >
+                {this.state.processing ? "Processing..." : "Buy"}
+              </Button>
+            </Grid>
+          </Grid>
+        </Card>
+
       </div>
     );
   }
 }
 
-export default ProductDetail;
+export default withStyles(styles, { withTheme: true })(ProductDetail);

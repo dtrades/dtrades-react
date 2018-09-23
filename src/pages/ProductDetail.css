@@ -1,6 +1,12 @@
 .imageContainer {
-
     max-width: 320px;
+}
+
+.cardStyle {
+  display: 'flex';
+  padding: '20px';
+  margin: '20px';
+  margin-top: '50px';
 }
 
 .topper {
@@ -9,7 +15,7 @@
     flex-direction: "row"
 }
 
-.x { 
+.x {
     padding-left: 80px;
 }
 
